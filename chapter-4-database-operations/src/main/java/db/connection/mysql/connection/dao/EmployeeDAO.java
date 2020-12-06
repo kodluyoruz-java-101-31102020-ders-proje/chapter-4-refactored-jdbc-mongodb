@@ -30,7 +30,9 @@ public class EmployeeDAO {
 			}
 			
 			while(resultSet.next()) {
-				employees.add(createEmployee(resultSet));
+				
+				Employee emp = createEmployee(resultSet);
+				employees.add(emp);
 			}
 		}
 		catch (Exception e) {

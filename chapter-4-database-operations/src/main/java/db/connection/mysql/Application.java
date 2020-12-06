@@ -24,19 +24,31 @@ public class Application {
 	
 	public static void main(String[] args) {
 		
-		showMenu();
-		
+		// Data layer
 		EmployeeDAO employeeDAO = new EmployeeDAO();
 		SalaryDAO salaryDAO = new SalaryDAO();
 		ManagerDAO managerDAO = new ManagerDAO();
 		DepartmentDAO departmentDAO = new DepartmentDAO();
-		
 		MongoEmployeeCollectionDao mongoEmployeeCollectionDao = new MongoEmployeeCollectionDao("employee");
 		
+		// Business layer
 		EmployeeService employeeService = new EmployeeService(employeeDAO, mongoEmployeeCollectionDao);
 		SalaryService salaryService = new SalaryService(salaryDAO);
 		ManagerService managerService = new ManagerService(managerDAO);
 		DepartmentService departmentService = new DepartmentService(departmentDAO);
+		
+		// Presentation layer
+		runPresentationLayer(employeeService, salaryService, managerService, departmentService);
+	}
+	
+	
+	private static void runPresentationLayer(
+			EmployeeService employeeService, 
+			SalaryService salaryService,
+			ManagerService managerService,
+			DepartmentService departmentService) {
+		
+		showMenu();
 		
 		while(true) {
 			
@@ -83,8 +95,8 @@ public class Application {
 			}
 			
 		}
-		
 	}
+	
 	
 	private static void showMenu() {
 		
